@@ -274,3 +274,21 @@ func Find[T any, F FindFunc[T]](ss []T, funcInterface F) (elem T, found bool) {
 	}
 	return *new(T), false
 }
+
+type EachFunc[T any] interface {
+	~func(int, T) | ~func(T)
+}
+
+// Runs provided function on each item of slice
+func Each[T any, F EachFunc[T]](ss []T, fn F) {
+	var run func(i int, t T)
+	switch x := interface{}(fn).(type) {
+	case func(int, T):
+		run = func(i int, t T) { x(i, t) }
+	case func(T):
+		run = func(i int, t T) { x(t) }
+	}
+	for i, s := range ss {
+		run(i,s)
+	}
+}
