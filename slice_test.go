@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ssoroka/slice"
+	"github.com/jh9aea/slice"
 	"github.com/stretchr/testify/require"
 )
 
