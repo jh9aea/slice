@@ -1,4 +1,4 @@
-module github.com/ssoroka/slice
+module github.com/jh9aea/slice
 
 go 1.18
 
