@@ -134,3 +134,19 @@ func TestFind(t *testing.T) {
 	require.Equal(t, 0, result)
 	require.Equal(t, false, found)
 }
+
+func TestEach(t *testing.T) {
+	func() {
+		var r [][]int
+		slice.Each([]int{1, 2, 3}, func(i int, v int) {
+			r = append(r, []int{i, v})
+		})
+		require.Equal(t, [][]int{{0, 1}, {1, 2}, {2, 3}}, r)
+	}()
+
+	var r [][]int
+	slice.Each([]int{1, 2, 3}, func(v int) {
+		r = append(r, []int{v})
+	})
+	require.Equal(t, [][]int{{1}, {2}, {3}}, r)
+}
