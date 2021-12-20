@@ -54,8 +54,15 @@ func TestReduce(t *testing.T) {
 		s = strconv.Itoa(accumulator + current)
 		return s
 	})
-
 	require.Equal(t, "55", result)
+
+	// different T and R
+	require.Equal(t,
+		[]int{1, 1, 2},
+		slice.Reduce([][]int{{1}, {1, 2}}, []int{}, func(acc []int, i int, s []int) []int {
+			return append(acc, s...)
+		}),
+	)
 }
 
 func TestSelect(t *testing.T) {

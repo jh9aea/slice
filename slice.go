@@ -134,10 +134,10 @@ func Map[T any, R any, F MapFunc[T, R]](ss []T, funcInterface F) []R {
 	return result
 }
 
-type AccumulatorFunc[T any] func(acc T, i int, s T) T
+type AccumulatorFunc[T any, R any] func(acc R, i int, s T) R
 
 // Reduce (aka inject) iterates over the slice of items and calls the accumulator function for each pass, storing the state in the acc variable through each pass.
-func Reduce[T any](items []T, initialAccumulator T, f AccumulatorFunc[T]) T {
+func Reduce[T any, R any](items []T, initialAccumulator R, f AccumulatorFunc[T, R]) R {
 	if items == nil {
 		return initialAccumulator
 	}
@@ -289,6 +289,6 @@ func Each[T any, F EachFunc[T]](ss []T, fn F) {
 		run = func(i int, t T) { x(t) }
 	}
 	for i, s := range ss {
-		run(i,s)
+		run(i, s)
 	}
 }
