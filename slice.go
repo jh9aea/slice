@@ -44,7 +44,7 @@ func Sort[T Ordered](ss []T) []T {
 }
 
 // SortBy returns a new, slice that is the sorted copy of the slice it was called on, using sortFunc to interpret the string as a sortable integer value. It does not mutate the original slice
-func SortBy[T Ordered](ss []T, sortFunc func(slice []T, i, j int) bool) []T {
+func SortBy[T any](ss []T, sortFunc func(slice []T, i, j int) bool) []T {
 	if ss == nil {
 		return nil
 	}
